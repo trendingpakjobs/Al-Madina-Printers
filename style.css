@@ -343,3 +343,39 @@ footer a:hover {
   .nav-links {display: none; flex-direction: column;}
   .hamburger {display: flex;}
                                }
+
+
+
+/* ===== WHY CHOOSE US ===== */
+.why-choose-us {
+  background: #f7f7f7;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.why-choose-us h2 {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 30px;
+}
+
+.choose-list {
+  list-style: none;
+  padding: 0;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.choose-list li {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.choose-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #D4AF37;
+}
