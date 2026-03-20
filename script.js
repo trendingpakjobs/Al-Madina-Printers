@@ -56,3 +56,25 @@ hiddenElements.forEach(el => {
 
 
 
+// ===== SCROLL VIDEO AUTOPLAY =====
+const video = document.getElementById("portfolioVideo");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+}, {
+  threshold: 0.5 // 50% visible hone pe play hoga
+});
+
+observer.observe(video);
+
+if (entry.isIntersecting) {
+  video.play().then(() => {
+    video.muted = false;
+  }).catch(() => {});
+}
