@@ -418,3 +418,18 @@ footer a:hover {
 }
 
 
+
+
+/* ==== Icons Styling ==== */
+.social-links a {
+  display: inline-block;
+  margin: 10px;
+  font-size: 20px;
+  color: #D4AF37;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
