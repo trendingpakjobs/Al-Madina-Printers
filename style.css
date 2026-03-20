@@ -433,3 +433,31 @@ footer a:hover {
   color: #fff;
   transform: scale(1.2);
 }
+
+
+/* ===== MAIN BLOCKS HEADING ===== */
+.main-heading {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.main-heading h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  color: #0A1F44;
+  position: relative;
+  display: inline-block;
+}
+
+/* Golden underline effect */
+.main-heading h2::after {
+  content: '';
+  display: block;
+  width: 50%;
+  height: 3px;
+  background: #D4AF37;
+  margin: 8px auto 0;
+}
+.main-heading h2 {
+  letter-spacing: 1px;
+}
