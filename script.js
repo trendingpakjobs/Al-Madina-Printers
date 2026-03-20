@@ -35,3 +35,24 @@ cards.forEach(card => {
     card.classList.add('active');
   });
 });
+
+
+
+// ===== SCROLL ANIMATION =====
+const hiddenElements = document.querySelectorAll('.block, .service-card, .product-card, .stat-card');
+
+const observer2 = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+hiddenElements.forEach(el => {
+  el.classList.add('hidden');
+  observer2.observe(el);
+});
+
+
+
