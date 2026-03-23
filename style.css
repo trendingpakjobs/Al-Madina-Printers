@@ -563,3 +563,40 @@ body {
 
 
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #0A1F44;
+  z-index: 9999;
+}
+
+body {
+  padding-top: 80px;
+}
+
+
+section {
+  width: 100%;
+  overflow: hidden;
+  }
+
+
+.service-grid,
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  width: 100%;
+  min-width: 0;
+}
+
+
+* {
+  max-width: 100%;
+}
+
