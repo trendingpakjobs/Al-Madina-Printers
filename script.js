@@ -2,50 +2,57 @@
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
-
-
-// STATS COUNTER ON SCROLL
-const counters = document.querySelectorAll('.counter');
-let started = false;
-
-function startCounter() {
-    counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        let count = 0;
-        const increment = target / 100;
-
-        const updateCounter = () => {
-            if (count < target) {
-                count += increment;
-                counter.innerText = Math.ceil(count) + "+";
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.innerText = target + "+";
-            }
-        };
-
-        updateCounter();
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
     });
 }
 
-const statsSection = document.querySelector('.stats');
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !started) {
-            started = true;
-            startCounter();
-            observer.unobserve(statsSection);
-        }
-    });
-}, {
-    threshold: 0.4
+// Run after page fully loads
+document.addEventListener("DOMContentLoaded", () => {
+
+    const counters = document.querySelectorAll('.counter');
+    const statsSection = document.querySelector('.stats');
+    let started = false;
+
+    function startCounter() {
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+            const increment = target / 100;
+
+            const updateCounter = () => {
+                if (count < target) {
+                    count += increment;
+                    counter.innerText = Math.ceil(count) + "+";
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.innerText = target + "+";
+                }
+            };
+
+            updateCounter();
+        });
+    }
+
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !started) {
+                    started = true;
+                    startCounter();
+                    observer.unobserve(statsSection);
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        observer.observe(statsSection);
+    }
+
 });
-
-observer.observe(statsSection);
 
 // ===== SERVICES & PRODUCTS POP =====
 const cards = document.querySelectorAll('.service-card, .product-card');
