@@ -1,30 +1,51 @@
-// ===== HAMBURGER MENU =====
+// Hamburger Menu
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
 hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
+    navLinks.classList.toggle('active');
 });
 
-// ===== COUNTER ANIMATION =====
+
+// STATS COUNTER ON SCROLL
 const counters = document.querySelectorAll('.counter');
+let started = false;
 
-counters.forEach(counter => {
-  counter.innerText = '0';
-  const updateCounter = () => {
-    const target = +counter.getAttribute('data-target');
-    const count = +counter.innerText;
-    const increment = target / 200;
+function startCounter() {
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
+        const increment = target / 100;
 
-    if(count < target){
-      counter.innerText = `${Math.ceil(count + increment)}`;
-      setTimeout(updateCounter, 10);
-    } else {
-      counter.innerText = target;
-    }
-  };
-  updateCounter();
+        const updateCounter = () => {
+            if (count < target) {
+                count += increment;
+                counter.innerText = Math.ceil(count) + "+";
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.innerText = target + "+";
+            }
+        };
+
+        updateCounter();
+    });
+}
+
+const statsSection = document.querySelector('.stats');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !started) {
+            started = true;
+            startCounter();
+            observer.unobserve(statsSection);
+        }
+    });
+}, {
+    threshold: 0.4
 });
+
+observer.observe(statsSection);
 
 // ===== SERVICES & PRODUCTS POP =====
 const cards = document.querySelectorAll('.service-card, .product-card');
