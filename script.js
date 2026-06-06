@@ -1,58 +1,30 @@
-// Hamburger Menu
+// ===== HAMBURGER MENU =====
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-}
-
-
-// Run after page fully loads
-document.addEventListener("DOMContentLoaded", () => {
-
-    const counters = document.querySelectorAll('.counter');
-    const statsSection = document.querySelector('.stats');
-    let started = false;
-
-    function startCounter() {
-        counters.forEach(counter => {
-            const target = +counter.getAttribute('data-target');
-            let count = 0;
-            const increment = target / 100;
-
-            const updateCounter = () => {
-                if (count < target) {
-                    count += increment;
-                    counter.innerText = Math.ceil(count) + "+";
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.innerText = target + "+";
-                }
-            };
-
-            updateCounter();
-        });
-    }
-
-    if (statsSection) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !started) {
-                    started = true;
-                    startCounter();
-                    observer.unobserve(statsSection);
-                }
-            });
-        }, {
-            threshold: 0.3
-        });
-
-        observer.observe(statsSection);
-    }
-
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
 });
+
+// ===== COUNTER ANIMATION =====
+const counters = document.querySelectorAll('.counter');
+
+counters.forEach(counter => {
+  counter.innerText = '0';
+  const updateCounter = () => {
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+    const increment = target / 200;
+
+    if(count < target){
+      counter.innerText = `${Math.ceil(count + increment)}`;
+      setTimeout(updateCounter, 10);
+    } else {
+      counter.innerText = target;
+    }
+  };
+  updateCounter();
+});;
 
 // ===== SERVICES & PRODUCTS POP =====
 const cards = document.querySelectorAll('.service-card, .product-card');
